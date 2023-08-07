@@ -16,78 +16,104 @@ if ($db->connect_error) {
 
 
 
-// $sehat = $_POST['sehat'];
-// $usia = $_POST['usia'];
-// $status = $_POST['status'];
-
-// $permasalahan = $_POST['permasalahan'];
-// $jujur = $_POST['jujur'];
-// $wni = $_POST['wni'];
-// $berdomisili_di_bojonegoro = $_POST['berdomisili_di_bojonegoro'];
-// $jaminan = $_POST['jaminan'];
-// $bersedia_di_survei = $_POST['bersedia_di_survei'];
-
-
+$sehat = $_POST['sehat'];
+$usia = $_POST['usia'];
+$status = $_POST['status'];
+$penghasilan = $_POST['penghasilan'];
+$permasalahan = $_POST['permasalahan'];
+$jujur = $_POST['jujur'];
+$wni = $_POST['wni'];
+$berdomisili_di_bojonegoro = $_POST['berdomisili_di_bojonegoro'];
+$jaminan = $_POST['jaminan'];
+$bersedia_di_survei = $_POST['bersedia_di_survei'];
 
 
 
 
-// // ---------
 
-// if ($sehat == 'ya') {
-// 	$nsehat = 1;
-// }else{
-// 	$nsehat = 0;
-// }
-// if ($usia == 'ya') {
-// 	$nusia = 1;
-// }else{
-// 	$nusia = 0;
-// }
-// if ($status == 'ya') {
-// 	$nStatus = 1;
-// }else{
-// 	$nStatus = 0;
-// }
 
-// if ($permasalahan == 'ya') {
-// 	$npermasalahan = 1;
-// }else{
-// 	$npermasalahan = 0;
-// }
-// if ($jujur == 'ya') {
-// 	$njujur = 1;
-// }else{
-// 	$njujur = 0;
-// }
-// if ($wni == 'ya') {
-// 	$nwni = 1;
-// }else{
-// 	$nwni = 0;
-// }
-// if ($berdomisili_di_bojonegoro == 'ya') {
-// 	$nberdomisili_di_bojonegoro = 1;
-// }else{
-// 	$nberdomisili_di_bojonegoro = 0;
-// }
-// if ($jaminan == 'ya') {
-// 	$njaminan = 1;
-// }else{
-// 	$njaminan = 0;
-// }
-// if ($bersedia_di_survei == 'ya') {
-// 	$nbersedia_di_survei = 1;
-// }else{
-// 	$nbersedia_di_survei = 0;
-// }
+// ---------
+
+if ($penghasilan>10000000) {
+	$npenghasilan=5;
+}elseif($penghasilan<=10000000 && $penghasilan>=5000000){
+   $npenghasilan=4;
+}elseif($penghasilan<=5000000 && $penghasilan>=3500000){
+   $npenghasilan=3;
+}elseif($penghasilan<=3500000 && $penghasilan>=1000000){
+   $npenghasilan=2;
+}elseif($penghasilan>1000000){
+   $npenghasilan=1;
+}
+else{
+   echo "NO";
+}
+
+if ($sehat == 'ya') {
+	$nsehat = 1;
+}else{
+	$nsehat = 0;
+}
+if ($usia == 'ya') {
+	$nusia = 1;
+}else{
+	$nusia = 0;
+}
+if ($status == 'ya') {
+	$nStatus = 1;
+}else{
+	$nStatus = 0;
+}
+
+if ($permasalahan == 'ya') {
+	$npermasalahan = 1;
+}else{
+	$npermasalahan = 0;
+}
+if ($jujur == 'ya') {
+	$njujur = 1;
+}else{
+	$njujur = 0;
+}
+if ($wni == 'ya') {
+	$nwni = 1;
+}else{
+	$nwni = 0;
+}
+if ($berdomisili_di_bojonegoro == 'ya') {
+	$nberdomisili_di_bojonegoro = 1;
+}else{
+	$nberdomisili_di_bojonegoro = 0;
+}
+if ($jaminan == 'ya') {
+	$njaminan = 1;
+}else{
+	$njaminan = 0;
+}
+if ($bersedia_di_survei == 'ya') {
+	$nbersedia_di_survei = 1;
+}else{
+	$nbersedia_di_survei = 0;
+}
 $nama = $_POST['nama'];
 $jenis_kelamin = $_POST['jenis_kelamin'];
 $alamat = $_POST['alamat'];
 // // sql
 $sql = "INSERT INTO tabel_alternatif (nama, jenis_kelamin, alamat, penghasilan, sehat, jujur, permasalahan, status,usia,wni,berdomisili_di_bojonegoro,jaminan,bersedia_di_survei)
-VALUES ('$nama',
-		'$jenis_kelamin',
-		'$alamat')";
+VALUES (
+'$nama',
+'$jenis_kelamin',
+'$alamat',
+'$penghasilan',
+'$sehat',
+'$jujur',
+'$permasalahan',
+'$status',
+'$usia',
+'$wni',
+'$berdomisili_di_bojonegoro',
+'$jaminan',
+'$bersedia_di_survei')";
 
 
 
