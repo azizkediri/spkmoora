@@ -97,7 +97,7 @@ foreach($kriteria as $id_kriteria=>$k){
    //-- inisialisasi nilai pembagi tiap kriteria
    $pembagi=0;
    foreach($alternatif as $id_alternatif=>$a){
-    echo   $pembagi+=pow($sample[$id_alternatif][$id_kriteria],2);
+      $pembagi+=pow($sample[$id_alternatif][$id_kriteria],2);
    }
    foreach($alternatif as $id_alternatif=>$a){
       $normal[$id_alternatif][$id_kriteria]/=sqrt($pembagi);

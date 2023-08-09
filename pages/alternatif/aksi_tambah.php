@@ -183,7 +183,7 @@ if ($db->query($sql) === TRUE) {
               	
 //               	//insert data to table nilai.
 				$sPenghasilan = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
-						VALUES ('1', 1, '$npenghasilan')";
+						VALUES ('1', '$id_alternatif', '$npenghasilan')";
 				$db->query($sPenghasilan);
 
 				 $i=1;
