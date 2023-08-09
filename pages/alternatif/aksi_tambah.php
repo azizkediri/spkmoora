@@ -1,15 +1,15 @@
 <?php
-// mengambil data koneksi
-// include '../../lib/koneksi.php';
+// mengambil data db
+// include '../../lib/db.php';
 // mengambil data dari form sebelumnya
 
 $dbhost = 'localhost';
 $dbuser = 'root';
 $dbpass = '';
 $dbname = 'db_moora';
-//-- koneksi ke database server dengan extension mysqli
+//-- db ke database server dengan extension mysqli
 $db = new mysqli($dbhost,$dbuser,$dbpass,$dbname);
-//-- hentikan program dan tampilkan pesan kesalahan jika koneksi gagal
+//-- hentikan program dan tampilkan pesan kesalahan jika db gagal
 if ($db->connect_error) {
    die('Connect Error ('.$db->connect_errno.')'.$db->connect_error);
 }
@@ -119,59 +119,59 @@ VALUES (
 
 
 if ($db->query($sql) === TRUE) {
-	$sql = 'SELECT * FROM tabel_kriteria';
-        $result = $db->query($sql);
-        //-- menyiapkan variable penampung berupa array
-        $kriteria=array();
-		$input_kriteria=array();
-		$nilai=array();
-        //-- melakukan iterasi pengisian array untuk tiap record data yang didapat
-        foreach ($result as $row) {
-             $kriteria[$row['id_kriteria']]=array($row['id_kriteria'],$row['kriteria'],$row['type'],$row['bobot']);
-        }
-		foreach($kriteria as $id_kriteria =>$value){
-			if($kriteria[$id_kriteria][1]=='Penghasilan'){
-			 $penghasilan = $_POST['penghasilan'];
-			 "<br>";
-			 $input_kriteria[$kriteria[$id_kriteria][0]] = 1;
-			 "=";
-			if ($penghasilan>10000000) {
-	 $nilai[$kriteria[$id_kriteria][0]]=5;
-}elseif($penghasilan<=10000000 && $penghasilan>=5000000){
-	$nilai[$kriteria[$id_kriteria][0]]=4;
-}elseif($penghasilan<=5000000 && $penghasilan>=3500000){
-	$nilai[$kriteria[$id_kriteria][0]]=3;
-}elseif($penghasilan<=3500000 && $penghasilan>=1000000){
-	$nilai[$kriteria[$id_kriteria][0]]=2;
-}elseif($penghasilan>1000000){
-	$nilai[$kriteria[$id_kriteria][0]]=1;
-}
-else{
-	echo "NO";
-}
+// 	$sql = 'SELECT * FROM tabel_kriteria';
+//         $result = $db->query($sql);
+//         //-- menyiapkan variable penampung berupa array
+//         $kriteria=array();
+// 		$input_kriteria=array();
+// 		$nilai=array();
+//         //-- melakukan iterasi pengisian array untuk tiap record data yang didapat
+//         foreach ($result as $row) {
+//              $kriteria[$row['id_kriteria']]=array($row['id_kriteria'],$row['kriteria'],$row['type'],$row['bobot']);
+//         }
+// 		foreach($kriteria as $id_kriteria =>$value){
+// 			if($kriteria[$id_kriteria][1]=='Penghasilan'){
+// 			 $penghasilan = $_POST['penghasilan'];
+// 			 "<br>";
+// 			 $input_kriteria[$kriteria[$id_kriteria][0]] = 1;
+// 			 "=";
+// 			if ($penghasilan>10000000) {
+// 	 $nilai[$kriteria[$id_kriteria][0]]=5;
+// }elseif($penghasilan<=10000000 && $penghasilan>=5000000){
+// 	$nilai[$kriteria[$id_kriteria][0]]=4;
+// }elseif($penghasilan<=5000000 && $penghasilan>=3500000){
+// 	$nilai[$kriteria[$id_kriteria][0]]=3;
+// }elseif($penghasilan<=3500000 && $penghasilan>=1000000){
+// 	$nilai[$kriteria[$id_kriteria][0]]=2;
+// }elseif($penghasilan>1000000){
+// 	$nilai[$kriteria[$id_kriteria][0]]=1;
+// }
+// else{
+// 	echo "NO";
+// }
+// 			}}
+// 		 $input_kriteria[$kriteria[$id_kriteria][0]] = $nilai[$kriteria[$id_kriteria][0]];
+// 		 "<br>";
+// 			}
+// 			else{
+// 		 $kriteria[$id_kriteria][0]."=";
+//          $input_kriteria[$kriteria[$id_kriteria][0]] =  $_POST[$kriteria[$id_kriteria][0]];
+// 		 "<br>";
 
-		 $input_kriteria[$kriteria[$id_kriteria][0]] = $nilai[$kriteria[$id_kriteria][0]];
-		 "<br>";
-			}
-			else{
-		 $kriteria[$id_kriteria][0]."=";
-         $input_kriteria[$kriteria[$id_kriteria][0]] =  $_POST[$kriteria[$id_kriteria][0]];
-		 "<br>";
-
-		if ($input_kriteria[$kriteria[$id_kriteria][0]] == 'ya') {
-	$nilai[$kriteria[$id_kriteria][0]] = 1;
-}else{
-	$nilai[$kriteria[$id_kriteria][0]] = 0;
-}
-			}
+// 		if ($input_kriteria[$kriteria[$id_kriteria][0]] == 'ya') {
+// 	$nilai[$kriteria[$id_kriteria][0]] = 1;
+// }else{
+// 	$nilai[$kriteria[$id_kriteria][0]] = 0;
+// }
+// 			}
 			
-        }
+//         }
 
 		
-		foreach($nilai as $n =>$value){
-			 echo $nilai[$n];
-			 echo "<br>";
-		}
+// 		foreach($nilai as $n =>$value){
+// 			 echo $nilai[$n];
+// 			 echo "<br>";
+// 		}
 		
 
 
@@ -182,66 +182,67 @@ else{
               	$id_alternatif = $hasil['id_alternatif'];
               	
 //               	//insert data to table nilai.
-				// $sPenghasilan = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
-				// 		VALUES ('1', 1, '$npenghasilan')";
-				// $db->query($sPenghasilan);
+				$sPenghasilan = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
+						VALUES ('1', 1, '$npenghasilan')";
+				$db->query($sPenghasilan);
+
 				 $i=1;
-				 $id_kriteria_n = 0;
-				 $nilai_n=0;
-				foreach($nilai as $n =>$value){
-					$id_kriteria_n = $kriteria[$n][0];
-					$nilai_n = $nilai[$n];
-					$enter = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
-			 		VALUES ('$id_kriteria_n', '$id_alternatif', '$nilai_n')";
-					$db->query($enter);
+				//  $id_kriteria_n = 0;
+				//  $nilai_n=0;
+				// foreach($nilai as $n =>$value){
+				// 	$id_kriteria_n = $kriteria[$n][0];
+				// 	$nilai_n = $nilai[$n];
+				// 	$enter = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
+			 	// 	VALUES ('$id_kriteria_n', '$id_alternatif', '$nilai_n')";
+				// 	$db->query($enter);
 					
-				}
+				// }
 				
-//               	$ssehat = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
-// 						VALUES ('2', '$id_alternatif', '$nsehat')";
-// 				$koneksi->query($ssehat);
+              	$ssehat = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
+						VALUES ('2', '$id_alternatif', '$nsehat')";
+				$db->query($ssehat);
 				
-// 				$sjujur = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
-// 						VALUES ('3', '$id_alternatif', '$njujur')";
-// 				$koneksi->query($sjujur);
+				$sjujur = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
+						VALUES ('3', '$id_alternatif', '$njujur')";
+				$db->query($sjujur);
 				
-// 				$spermasalahan = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
-// 						VALUES ('4', '$id_alternatif', '$npermasalahan')";
-// 				$koneksi->query($spermasalahan);
+				$spermasalahan = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
+						VALUES ('4', '$id_alternatif', '$npermasalahan')";
+				$db->query($spermasalahan);
 				
-// 				$sStatus = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
-// 						VALUES ('5', '$id_alternatif', '$nStatus')";
-// 				$koneksi->query($sStatus);
+				$sStatus = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
+						VALUES ('5', '$id_alternatif', '$nStatus')";
+				$db->query($sStatus);
 				
-// 				$susia = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
-// 						VALUES ('6', '$id_alternatif', '$nusia')";
-// 				$koneksi->query($susia);
+				$susia = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
+						VALUES ('6', '$id_alternatif', '$nusia')";
+				$db->query($susia);
 				
-// 				$swni = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
-// 						VALUES ('7', '$id_alternatif', '$nwni')";
-// 				$koneksi->query($swni);
+				$swni = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
+						VALUES ('7', '$id_alternatif', '$nwni')";
+				$db->query($swni);
 
-// 				$sberdomisili_di_bojonegoro = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
-// 						VALUES ('8', '$id_alternatif', '$nberdomisili_di_bojonegoro')";
-// 				$koneksi->query($sberdomisili_di_bojonegoro);
+				$sberdomisili_di_bojonegoro = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
+						VALUES ('8', '$id_alternatif', '$nberdomisili_di_bojonegoro')";
+				$db->query($sberdomisili_di_bojonegoro);
 
-// 				$sjaminan = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
-// 						VALUES ('9', '$id_alternatif', '$njaminan')";
-// 				$koneksi->query($sjaminan);
+				$sjaminan = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
+						VALUES ('9', '$id_alternatif', '$njaminan')";
+				$db->query($sjaminan);
 
-// 				$sbersedia_di_survei = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
-// 						VALUES ('10', '$id_alternatif', '$nbersedia_di_survei')";
-// 				$koneksi->query($sbersedia_di_survei);
+				$sbersedia_di_survei = "INSERT INTO tabel_nilai (id_kriteria, id_alternatif, nilai)
+						VALUES ('10', '$id_alternatif', '$nbersedia_di_survei')";
+				$db->query($sbersedia_di_survei);
 
-				echo "<script>alert('Input berhasil');window.location = '../../index.php?module=id_alternatif';</script>";
-// }
+				echo "<script>alert('Input berhasil');window.location = '../../index.php?module=list_alternatif';</script>";
+}
 
 // eksekusi sql
 
-// if ($koneksi->query($sql) === TRUE) {
+// if ($db->query($sql) === TRUE) {
 //     echo "<script>alert('Input berhasil');window.location = '../../index.php?module=list_kriteria';</script>";
 // } else {
-//     echo "Error: " . $sql . "<br>" . $koneksi->error;
-}
+//     echo "Error: " . $sql . "<br>" . $db->error;
+// }
 
-?>
+// 

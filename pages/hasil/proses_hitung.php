@@ -52,8 +52,6 @@ foreach ($result as $row) {
 		$row['berdomisili_di_bojonegoro'],
 		$row['jaminan'],
 		$row['bersedia_di_survei']);
-
-     
 }
 
 //MENAMPILKAN NILAI ALTERNATIF
@@ -79,8 +77,8 @@ foreach ($result as $row) {
    if (!isset($sample[$row['id_alternatif']])) {
       $sample[$row['id_alternatif']] = array();
    }
-    $sample[$row['id_alternatif']][$row['id_kriteria']] = $row['nilai'];
-    
+   $sample[$row['id_alternatif']][$row['id_kriteria']] = $row['nilai'];
+   
 }
 
 //MeNAMPILKAN PERUBAHAN NILAI KE ANGKA
@@ -92,7 +90,6 @@ foreach ($sample as $id_sample => $value) {
    echo "<br>";
 }
 
-
 //PROSES NORMALISASI MATRIX
 //-- inisialisasi nilai normalisasi dengan nilai dari $sample
 $normal=$sample;
@@ -100,7 +97,7 @@ foreach($kriteria as $id_kriteria=>$k){
    //-- inisialisasi nilai pembagi tiap kriteria
    $pembagi=0;
    foreach($alternatif as $id_alternatif=>$a){
-      $pembagi+=pow($sample[$id_alternatif][$id_kriteria],2);
+    echo   $pembagi+=pow($sample[$id_alternatif][$id_kriteria],2);
    }
    foreach($alternatif as $id_alternatif=>$a){
       $normal[$id_alternatif][$id_kriteria]/=sqrt($pembagi);

@@ -9,8 +9,8 @@ $bobot = $_POST['bobot'];
 $sql = "INSERT INTO tabel_kriteria (kriteria, type, bobot)
 VALUES ('$kriteria', '$type', '$bobot')";
 
-$addColumnQuery = "ALTER TABLE tabel_alternatif ADD $kriteria varchar(5)";
-$db->query($addColumnQuery);
+$addColumnQuery = "ALTER TABLE tabel_alternatif ADD $kriteria varchar(5) default 'tidak'";
+$koneksi->query($addColumnQuery);
 
 // eksekusi sql
 if ($koneksi->query($sql) === TRUE) {
